@@ -2,27 +2,27 @@
 
 ## Project Summary
 
-In this project you will build and explain a small music recommender system.
+This project builds and explains a small music recommender system.
 
-Your goal is to:
+The project demonstrates how to:
 
 - Represent songs and a user "taste profile" as data
 - Design a scoring rule that turns that data into recommendations
 - Evaluate what your system gets right and wrong
 - Reflect on how this mirrors real world AI recommenders
 
-This project simulates a content-based music recommendation system using Python. It compares songs with user preferences such as genre, mood, energy, and valence. Each song will receive a weighted score out of 100 points, and the system will recommend the highest-scoring songs. The project will also explore how recommendation algorithms work and their potential limitations and biases.
+This project simulates a content-based music recommendation system using Python. It compares songs with user preferences such as genre, mood, energy, and valence. Each song receives a weighted score out of 100 points, and the system recommends the highest-scoring songs. The project also explores how recommendation algorithms work and their potential limitations and biases.
 
 ---
 
 ## How The System Works
 
-Real-world music recommendation systems use listening habits, user preferences, and song characteristics to suggest music. My project will use a simple content-based recommendation system that compares songs with a user's preferred genre, mood, energy, and valence. Each song will receive a score out of 100 points, with 40 points for genre, 30 for mood, 20 for energy similarity, and 10 for valence similarity. Energy and valence will be scored based on how close they are to the user's preferences. The system will then rank songs from highest to lowest score and recommend the best matches.
+Real-world music recommendation systems use listening habits, user preferences, and song characteristics to suggest music. My project uses a simple content-based recommendation system that compares songs with a user's preferred genre, mood, energy, and valence. Each song receives a score out of 100 points, with 40 points for genre, 30 for mood, 20 for energy similarity, and 10 for valence similarity. Energy and valence are scored based on how close they are to the user's preferences. The system ranks songs from highest to lowest score and recommends the best matches.
 
 
-### Planned User Profile
+### Example User Profile
 
-The recommender will use this example taste profile:
+The recommender supports this example taste profile. The CLI currently uses pop, happy, and energy 0.80, with a default target valence of 0.60:
 
 ```python
 user_profile = {
@@ -37,6 +37,7 @@ user_profile = {
 
 ### Recommendation System Flow
 
+```text
 Input: User Preferences
         |
         v
@@ -54,6 +55,7 @@ Rank Songs by Total Score
         |
         v
 Output: Top K Recommended Songs
+```
 
 
 This user prefers relaxed lofi music with moderate-low energy and a slightly positive mood.
@@ -61,21 +63,23 @@ This user prefers relaxed lofi music with moderate-low energy and a slightly pos
 ### Song and UserProfile Features
 
 **Song:**
+
 - `id`, `title`, and `artist`: Identify each song.
 - `genre` and `mood`: Describe the song's style and feeling.
 - `energy` and `valence`: Describe the song's intensity and positivity.
 - `tempo_bpm`, `danceability`, and `acousticness`: Provide additional music characteristics.
 
 **UserProfile:**
+
 - `favorite_genre`: The user's preferred music genre.
 - `favorite_mood`: The user's preferred mood.
 - `target_energy`: The user's preferred energy level.
 - `likes_acoustic`: Whether the user prefers acoustic music.
-- `target_valence`: A planned attribute for the user's preferred positivity level.
+- `target_valence`: The implemented preference for positivity, with a default of 0.60.
 
 **Recommendation Process:**
 
-The recommender will compare each song with the user's preferences. A matching genre earns 40 points, a matching mood earns 30 points, energy similarity earns up to 20 points, and valence similarity earns up to 10 points. Songs will be ranked from highest to lowest score, and the highest-scoring songs will be recommended.
+The recommender compares each song with the user's preferences. A matching genre earns 40 points, a matching mood earns 30 points, energy similarity earns up to 20 points, and valence similarity earns up to 10 points. Songs are ranked from highest to lowest score, and the highest-scoring songs are recommended.
 
 ---
 
@@ -110,28 +114,29 @@ The system may favor certain genres and moods because 70% of the score comes fro
    python -m venv .venv
    source .venv/bin/activate      # Mac or Linux
    .venv\Scripts\activate         # Windows
+   ```
 
-2. Install dependencies
+2. Install dependencies:
 
-```bash
-pip install -r requirements.txt
-```
+   ```bash
+   pip install -r requirements.txt
+   ```
 
-3. Run the app:
+3. Run the app from the project root:
 
-```bash
-python -m src.main
-```
+   ```bash
+   python -m src.main
+   ```
 
 ### Running Tests
 
-Run the starter tests with:
+Run the automated tests with:
 
 ```bash
 pytest
 ```
 
-You can add more tests in `tests/test_recommender.py`.
+The equivalent command is `python -m pytest -q`. The suite in `tests/test_recommender.py` currently has 12 passing test cases covering class-based ranking, edge cases, and specific scoring explanations.
 
 ---
 
@@ -351,38 +356,25 @@ After recording the experiment, I restored the original **40/30/20/10** weights 
 
 ## Experiments You Tried
 
-Use this section to document the experiments you ran. For example:
+I evaluated three normal profiles and three edge cases to see how the fixed scoring rule handles different preferences and missing genres. The actual rankings and explanations are recorded in [Phase 4: Stress Test Results](#phase-4-stress-test-results).
 
-- What happened when you changed the weight on genre from 2.0 to 0.5
-- What happened when you added tempo or valence to the score
-- How did your system behave for different types of users
+I also compared the original 40/30/20/10 weights with temporary 20/30/40/10 weights using the unchanged default CLI profile. Rooftop Lights moved ahead of Gym Hero, but the top-five membership stayed the same. The original weights were restored. See the [Weight Shift Experiment](#weight-shift-experiment) for the before/after scores.
 
 ---
 
 ## Limitations and Risks
 
-Summarize some limitations of your recommender.
+The catalog contains only 18 fictional songs with uneven genre coverage, and bluegrass is absent. Exact genre and mood matches account for 70% of the score, which can limit cross-genre discovery and repeatedly favor the same songs. Lyrics, language, listening history, acousticness, danceability, and tempo do not affect the current score.
 
-Examples:
-
-- It only works on a tiny catalog
-- It does not understand lyrics or language
-- It might over favor one genre or mood
-
-You will go deeper on this in your model card.
+Scores show matches under the chosen rules; listener satisfaction was not measured. More detail is documented in the [Model Card's Limitations and Bias section](model_card.md#6-limitations-and-bias).
 
 ---
 
 ## Reflection
 
-Read and complete `model_card.md`:
+The project showed me how strongly the chosen attributes and weights shape recommendations. Storm Runner stayed first for a melancholic profile because its genre and energy points outweighed the mood mismatch. Changing the weights changed rankings without proving that listeners would prefer the new results.
 
-[**Model Card**](model_card.md)
-
-Write 1 to 2 paragraphs here about what you learned:
-
-- about how recommenders turn data into predictions
-- about where bias or unfairness could show up in systems like this
+Codex helped with implementation, test profiles, troubleshooting, and documentation. Checking the actual CSV header caught its incorrect column count, and running the program let me verify the scores. My full reflection and next steps are in the completed [**Model Card**](model_card.md#9-personal-reflection).
 
 
 

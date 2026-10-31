@@ -2,37 +2,19 @@
 
 ## 1. Model Name  
 
-Give your model a short, descriptive name.  
-Example: **VibeFinder 1.0**  
+**Music Recommender Simulation**
 
 ---
 
 ## 2. Intended Use  
 
-Describe what your recommender is designed to do and who it is for. 
-
 This project is a content-based music recommender for classroom exploration. It compares song attributes with a user's preferences and suggests the closest matches. It assumes the user's chosen genre, mood, energy, and valence describe what they want to hear for that listening session.
 
-Prompts:  
-
-- What kind of recommendations does it generate  
-- What assumptions does it make about the user  
-- Is this for real users or classroom exploration  
+This is a classroom simulation, not a production-ready recommendation service. Its scores describe matches under the chosen rules and should not be used as a measure of real listener satisfaction.
 
 ---
 
 ## 3. How the Model Works  
-
-Explain your scoring approach in simple language.  
-
-Prompts:  
-
-- What features of each song are used (genre, energy, mood, etc.)  
-- What user preferences are considered  
-- How does the model turn those into a score  
-- What changes did you make from the starter logic  
-
-Avoid code here. Pretend you are explaining the idea to a friend who does not program.
 
 The current command-line recommender uses rules and weights that I chose by hand. It reads the songs from the CSV file and calculates a matching score for each song:
 
@@ -47,46 +29,27 @@ Energy and valence inputs are expected to be between 0 and 1. The four contribut
 
 Every song receives a score. The program sorts all songs from highest to lowest score and returns the top k recommendations, where k is the number requested. The terminal currently requests five. Songs with equal scores keep their original order. Each result includes human-readable reasons showing genre and mood matches or mismatches and the energy and valence points awarded.
 
-The CSV loading, scoring, and ranking functions now replace the starter placeholders used by the terminal program. The separate class-based recommendation and explanation methods are still placeholders.
+The CSV loading, scoring, and ranking functions are implemented. The class-based recommendation and explanation methods also use the same scoring function. They return ranked Song objects and readable scoring reasons while preserving the original song collection.
 
 ---
 
 ## 4. Data  
 
-Describe the dataset the model uses.  
-
 The catalog currently contains **18 fictional songs** in data/songs.csv. I kept the original 10 songs and added eight to include more styles, such as classical, hip-hop, reggae, electronic, R&B, folk, latin, and metal. The dataset also includes pop, lofi, rock, ambient, jazz, synthwave, and indie pop.
 
-Each song stores an ID, title, artist, genre, mood, energy, tempo, valence, danceability, and acousticness. The current score uses only genre, mood, energy, and valence. These made-up examples help demonstrate the algorithm, but they do not represent the full range of music or listener tastes.
-
-Prompts:  
-
-- How many songs are in the catalog  
-- What genres or moods are represented  
-- Did you add or remove data  
-- Are there parts of musical taste missing in the dataset  
+Each song stores an ID, title, artist, genre, mood, energy, tempo, valence, danceability, and acousticness. The current score uses only genre, mood, energy, and valence. These made-up examples help demonstrate the algorithm, but they do not represent the full range of music or listener tastes. Moods include happy, chill, intense, relaxed, peaceful, and melancholic. Coverage is uneven: there are three lofi songs and two pop songs, while each other genre has only one song.
 
 ---
 
 ## 5. Strengths  
 
-Where does your system seem to work well  
-
 The score is easy to follow because each feature contributes a known number of points. Matching energy to a target also supports calm preferences instead of always rewarding high-energy songs. The explanations let a user see why a song ranked highly and check whether that reasoning fits their taste.
-
-Prompts:  
-
-- User types for which it gives reasonable results  
-- Any patterns you think your scoring captures correctly  
-- Cases where the recommendations matched your intuition  
 
 ---
 
 ## 6. Limitations and Bias 
 
-During testing, I found that the recommender sometimes gives too much importance to matching genres. For example, Storm Runner scored 67.00 points for the High-Energy Melancholic profile, while Empty Platform scored only 47.50 despite matching the user's preferred mood. This happened because Storm Runner received 40 points for its genre and nearly full points for energy similarity. The system may therefore overlook songs that better match a user's emotional preferences. A possible improvement would be to let users adjust the scoring weights based on whether genre or mood matters more to them.
-
-Where the system struggles or behaves unfairly. 
+During testing, I found that exact genre matching sometimes outweighed a match with the requested mood. For example, Storm Runner scored 67.00 points for the High-Energy Melancholic profile, while Empty Platform scored only 47.50 despite matching the user's preferred mood. This happened because Storm Runner received 40 points for its genre and nearly full points for energy similarity. The system may therefore overlook songs that better match a user's emotional preferences. A possible improvement would be to let users adjust the scoring weights based on whether genre or mood matters more to them.
 
 - The catalog has only 18 fictional songs, so most genres have very few examples and many musical styles are missing.
 - Exact genre and mood matches control **70% of the score**. Related labels such as chill and relaxed receive no partial credit, which can push otherwise similar songs down the list.
@@ -95,20 +58,13 @@ Where the system struggles or behaves unfairly.
 - The user profile stores likes_acoustic, but the scoring formula does not currently use it. Tempo, danceability, and acousticness are also stored song attributes that do not affect scores.
 - The rules do not consider lyrics, language, listening history, or feedback from the user. A high score means a strong match under these rules; it does not guarantee the user will enjoy the song.
 
-Prompts:  
-
-- Features it does not consider  
-- Genres or moods that are underrepresented  
-- Cases where the system overfits to one preference  
-- Ways the scoring might unintentionally favor some users  
-
 ---
 
 ## 7. Evaluation  
 
-How you checked whether the recommender behaved as expected. 
-
 I evaluated the recommender with **18 fictional songs** and six profiles using the original **40/30/20/10** weights. Each profile returned five recommendations in descending score order. I checked the scores, ranking order, and explanations recorded in the README.
+
+Separately, **12 automated test cases pass** with `python -m pytest -q`. They cover class-based ranking, reversed input, different preferences, energy and valence matching, empty catalogs, result limits, stable ties, unchanged inputs, and specific scoring explanations. The six profiles below were manually evaluated from their generated recommendations; they are separate from the automated test suite.
 
 - **High-Energy Pop:** Pop, happy, energy 0.85, valence 0.80; tests upbeat preferences.
 - **Chill Lofi:** Lofi, chill, energy 0.40, valence 0.60; tests calmer preferences.
@@ -131,45 +87,25 @@ In a separate weight experiment, I kept the default pop/happy CLI profile at ene
 
 These numerical results show how the rules behave. Listener satisfaction was not measured, so the changed rankings do not prove better recommendation accuracy.
 
-Prompts:  
-
-- Which user profiles you tested  
-- What you looked for in the recommendations  
-- What surprised you  
-- Any simple tests or comparisons you ran  
-
-No need for numeric metrics unless you created some.
-
 ---
 
 ## 8. Future Work  
-
-Ideas for how you would improve the model next.  
 
 These are possible future improvements; they are not part of the current scoring system:
 
 - Expand the catalog with more songs and more examples within each genre and mood.
 - Allow several preferred genres and moods, and give partial credit for related mood labels.
-- Compare different weights to see whether less emphasis on exact genre matches improves cross-genre discovery.
+- Let users adjust the scoring weights, then compare the results to see whether less emphasis on exact genre matches improves cross-genre discovery.
 - Add an acousticness preference so likes_acoustic can affect recommendations. If it receives points, adjust the other weights to keep the total at 100.
 - Consider tempo or danceability preferences and add a simple way to include varied genres among the top results.
-- Complete the class-based recommendation methods using the same scoring rule, and collect listener feedback to check whether the recommendations feel useful.
-
-Prompts:  
-
-- Additional features or preferences  
-- Better ways to explain recommendations  
-- Improving diversity among the top results  
-- Handling more complex user tastes  
+- Collect listener feedback to check whether the recommendations feel useful.
 
 ---
 
 ## 9. Personal Reflection  
 
-A few sentences about your experience.  
+My biggest learning moment was seeing how the 40/30/20/10 weights shape rankings. Storm Runner outranked Empty Platform for a melancholic profile because its genre and energy points outweighed the mood match. I was surprised that the same song could stay first even after the requested mood changed.
 
-Prompts:  
+Codex helped me implement the code, create test profiles, troubleshoot the CLI, and document the findings. I still needed to check its suggestions against the files and actual terminal output. Codex initially counted the CSV's 10 columns as 11. Checking the actual CSV header caught the mistake and reminded me to verify AI-generated details, including column counts and score calculations.
 
-- What you learned about recommender systems  
-- Something unexpected or interesting you discovered  
-- How this changed the way you think about music recommendation apps  
+The temporary 20/30/40/10 experiment moved Rooftop Lights above Gym Hero, showing that different weights change rankings without proving better listener satisfaction. Next, I would add more diverse songs, give partial credit for related moods, and let users adjust the weights. I would also collect listener feedback to check whether those changes make the recommendations more useful.

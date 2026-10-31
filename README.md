@@ -187,6 +187,168 @@ TOP 5 MUSIC RECOMMENDATIONS
 
 ---
 
+## Phase 4: Stress Test Results
+
+I loaded the 18 songs once with `load_songs()` and ran all six profiles through `recommend_songs()` with `k=5`. The output below was captured from that run using the existing 40/30/20/10 scoring rule. Each profile returned five songs in descending score order.
+
+### High-Energy Pop
+
+```text
+=== High-Energy Pop ===
+Preferences: genre=pop, mood=happy, energy=0.85, valence=0.80
+1. Sunrise City | Score: 99.00/100
+   Genre matches pop: +40 points. Mood matches happy: +30 points. Energy 0.82 compared with target
+   0.85: +19.40 points. Valence 0.84 compared with target 0.80: +9.60 points.
+2. Gym Hero | Score: 68.10/100
+   Genre matches pop: +40 points. Mood does not match happy: +0 points. Energy 0.93 compared with
+   target 0.85: +18.40 points. Valence 0.77 compared with target 0.80: +9.70 points.
+3. Rooftop Lights | Score: 58.10/100
+   Genre does not match pop: +0 points. Mood matches happy: +30 points. Energy 0.76 compared with
+   target 0.85: +18.20 points. Valence 0.81 compared with target 0.80: +9.90 points.
+4. Electric Horizon | Score: 28.40/100
+   Genre does not match pop: +0 points. Mood does not match happy: +0 points. Energy 0.90 compared
+   with target 0.85: +19.00 points. Valence 0.86 compared with target 0.80: +9.40 points.
+5. Plaza in Bloom | Score: 27.80/100
+   Genre does not match pop: +0 points. Mood does not match happy: +0 points. Energy 0.81 compared
+   with target 0.85: +19.20 points. Valence 0.94 compared with target 0.80: +8.60 points.
+Confirmed: 5 recommendations; scores in descending order.
+```
+
+### Chill Lofi
+
+```text
+=== Chill Lofi ===
+Preferences: genre=lofi, mood=chill, energy=0.40, valence=0.60
+1. Midnight Coding | Score: 99.20/100
+   Genre matches lofi: +40 points. Mood matches chill: +30 points. Energy 0.42 compared with target
+   0.40: +19.60 points. Valence 0.56 compared with target 0.60: +9.60 points.
+2. Library Rain | Score: 99.00/100
+   Genre matches lofi: +40 points. Mood matches chill: +30 points. Energy 0.35 compared with target
+   0.40: +19.00 points. Valence 0.60 compared with target 0.60: +10.00 points.
+3. Focus Flow | Score: 69.90/100
+   Genre matches lofi: +40 points. Mood does not match chill: +0 points. Energy 0.40 compared with
+   target 0.40: +20.00 points. Valence 0.59 compared with target 0.60: +9.90 points.
+4. Spacewalk Thoughts | Score: 57.10/100
+   Genre does not match lofi: +0 points. Mood matches chill: +30 points. Energy 0.28 compared with
+   target 0.40: +17.60 points. Valence 0.65 compared with target 0.60: +9.50 points.
+5. Velvet Letters | Score: 29.00/100
+   Genre does not match lofi: +0 points. Mood does not match chill: +0 points. Energy 0.43 compared
+   with target 0.40: +19.40 points. Valence 0.64 compared with target 0.60: +9.60 points.
+Confirmed: 5 recommendations; scores in descending order.
+```
+
+### Intense Rock
+
+```text
+=== Intense Rock ===
+Preferences: genre=rock, mood=intense, energy=0.90, valence=0.45
+1. Storm Runner | Score: 99.50/100
+   Genre matches rock: +40 points. Mood matches intense: +30 points. Energy 0.91 compared with
+   target 0.90: +19.80 points. Valence 0.48 compared with target 0.45: +9.70 points.
+2. Gym Hero | Score: 56.20/100
+   Genre does not match rock: +0 points. Mood matches intense: +30 points. Energy 0.93 compared with
+   target 0.90: +19.40 points. Valence 0.77 compared with target 0.45: +6.80 points.
+3. Iron Resolve | Score: 27.60/100
+   Genre does not match rock: +0 points. Mood does not match intense: +0 points. Energy 0.97
+   compared with target 0.90: +18.60 points. Valence 0.35 compared with target 0.45: +9.00 points.
+4. Night Drive Loop | Score: 26.60/100
+   Genre does not match rock: +0 points. Mood does not match intense: +0 points. Energy 0.75
+   compared with target 0.90: +17.00 points. Valence 0.49 compared with target 0.45: +9.60 points.
+5. Electric Horizon | Score: 25.90/100
+   Genre does not match rock: +0 points. Mood does not match intense: +0 points. Energy 0.90
+   compared with target 0.90: +20.00 points. Valence 0.86 compared with target 0.45: +5.90 points.
+Confirmed: 5 recommendations; scores in descending order.
+```
+
+### High-Energy Melancholic
+
+```text
+=== High-Energy Melancholic ===
+Preferences: genre=rock, mood=melancholic, energy=0.90, valence=0.20
+1. Storm Runner | Score: 67.00/100
+   Genre matches rock: +40 points. Mood does not match melancholic: +0 points. Energy 0.91 compared
+   with target 0.90: +19.80 points. Valence 0.48 compared with target 0.20: +7.20 points.
+2. Empty Platform | Score: 47.50/100
+   Genre does not match rock: +0 points. Mood matches melancholic: +30 points. Energy 0.29 compared
+   with target 0.90: +7.80 points. Valence 0.23 compared with target 0.20: +9.70 points.
+3. Iron Resolve | Score: 27.10/100
+   Genre does not match rock: +0 points. Mood does not match melancholic: +0 points. Energy 0.97
+   compared with target 0.90: +18.60 points. Valence 0.35 compared with target 0.20: +8.50 points.
+4. Night Drive Loop | Score: 24.10/100
+   Genre does not match rock: +0 points. Mood does not match melancholic: +0 points. Energy 0.75
+   compared with target 0.90: +17.00 points. Valence 0.49 compared with target 0.20: +7.10 points.
+5. Gym Hero | Score: 23.70/100
+   Genre does not match rock: +0 points. Mood does not match melancholic: +0 points. Energy 0.93
+   compared with target 0.90: +19.40 points. Valence 0.77 compared with target 0.20: +4.30 points.
+Confirmed: 5 recommendations; scores in descending order.
+```
+
+### Missing Genre
+
+```text
+=== Missing Genre ===
+Preferences: genre=bluegrass, mood=chill, energy=0.40, valence=0.60
+1. Midnight Coding | Score: 59.20/100
+   Genre does not match bluegrass: +0 points. Mood matches chill: +30 points. Energy 0.42 compared
+   with target 0.40: +19.60 points. Valence 0.56 compared with target 0.60: +9.60 points.
+2. Library Rain | Score: 59.00/100
+   Genre does not match bluegrass: +0 points. Mood matches chill: +30 points. Energy 0.35 compared
+   with target 0.40: +19.00 points. Valence 0.60 compared with target 0.60: +10.00 points.
+3. Spacewalk Thoughts | Score: 57.10/100
+   Genre does not match bluegrass: +0 points. Mood matches chill: +30 points. Energy 0.28 compared
+   with target 0.40: +17.60 points. Valence 0.65 compared with target 0.60: +9.50 points.
+4. Focus Flow | Score: 29.90/100
+   Genre does not match bluegrass: +0 points. Mood does not match chill: +0 points. Energy 0.40
+   compared with target 0.40: +20.00 points. Valence 0.59 compared with target 0.60: +9.90 points.
+5. Velvet Letters | Score: 29.00/100
+   Genre does not match bluegrass: +0 points. Mood does not match chill: +0 points. Energy 0.43
+   compared with target 0.40: +19.40 points. Valence 0.64 compared with target 0.60: +9.60 points.
+Confirmed: 5 recommendations; scores in descending order.
+```
+
+### Intense Classical
+
+```text
+=== Intense Classical ===
+Preferences: genre=classical, mood=intense, energy=0.95, valence=0.20
+1. Storm Runner | Score: 56.40/100
+   Genre does not match classical: +0 points. Mood matches intense: +30 points. Energy 0.91 compared
+   with target 0.95: +19.20 points. Valence 0.48 compared with target 0.20: +7.20 points.
+2. Gym Hero | Score: 53.90/100
+   Genre does not match classical: +0 points. Mood matches intense: +30 points. Energy 0.93 compared
+   with target 0.95: +19.60 points. Valence 0.77 compared with target 0.20: +4.30 points.
+3. Quiet Observatory | Score: 50.40/100
+   Genre matches classical: +40 points. Mood does not match intense: +0 points. Energy 0.18 compared
+   with target 0.95: +4.60 points. Valence 0.62 compared with target 0.20: +5.80 points.
+4. Iron Resolve | Score: 28.10/100
+   Genre does not match classical: +0 points. Mood does not match intense: +0 points. Energy 0.97
+   compared with target 0.95: +19.60 points. Valence 0.35 compared with target 0.20: +8.50 points.
+5. Night Drive Loop | Score: 23.10/100
+   Genre does not match classical: +0 points. Mood does not match intense: +0 points. Energy 0.75
+   compared with target 0.95: +16.00 points. Valence 0.49 compared with target 0.20: +7.10 points.
+Confirmed: 5 recommendations; scores in descending order.
+```
+
+These results show how much exact genre and mood labels affect the rankings. Gym Hero beats Rooftop Lights for High-Energy Pop because genre earns more points than mood. For Intense Rock, Gym Hero also beats metal song Iron Resolve because its intense mood matches, while defiant receives no mood points. Storm Runner beats Empty Platform for High-Energy Melancholic because its genre and energy matches outweigh the melancholic mood match. For Intense Classical, rock and pop songs rank above Quiet Observatory because they better match the requested mood and energy. Bluegrass is absent from the catalog, so Missing Genre returns other genres and no song can earn more than 60 points. The recommender still returns five results even when none match the requested genre.
+
+### Weight Shift Experiment
+
+I temporarily changed the genre/mood/energy/valence weights from **40/30/20/10** to **20/30/40/10**. Both versions have a maximum score of 100. I kept the default CLI profile unchanged: pop, happy, energy 0.80, and target valence 0.60. The actual before/after results were:
+
+| Song | Original rank | Original score | Experimental rank | Experimental score |
+| --- | ---: | ---: | ---: | ---: |
+| Sunrise City | 1 | 97.20 | 1 | 96.80 |
+| Gym Hero | 2 | 65.70 | 3 | 63.10 |
+| Rooftop Lights | 3 | 57.10 | 2 | 76.30 |
+| Sidewalk Crown | 4 | 28.40 | 4 | 48.00 |
+| Night Drive Loop | 5 | 27.90 | 5 | 46.90 |
+
+Rooftop Lights overtook Gym Hero because energy similarity became more important and genre matching became less important. The top-five membership did not change. This shows different rankings, not proven improved accuracy; listener feedback would be needed to judge which recommendations are more useful.
+
+After recording the experiment, I restored the original **40/30/20/10** weights and their scoring explanations.
+
+---
+
 ## Experiments You Tried
 
 Use this section to document the experiments you ran. For example:

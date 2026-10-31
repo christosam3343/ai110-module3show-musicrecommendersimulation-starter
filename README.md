@@ -11,23 +11,32 @@ Your goal is to:
 - Evaluate what your system gets right and wrong
 - Reflect on how this mirrors real world AI recommenders
 
-Replace this paragraph with your own summary of what your version does.
+This project simulates a content-based music recommendation system using Python. It compares songs with user preferences such as genre, mood, energy, and valence. Each song will receive a weighted score out of 100 points, and the system will recommend the highest-scoring songs. The project will also explore how recommendation algorithms work and their potential limitations and biases.
 
 ---
 
 ## How The System Works
 
-Explain your design in plain language.
+Real-world music recommendation systems use listening habits, user preferences, and song characteristics to suggest music. My project will use a simple content-based recommendation system that compares songs with a user's preferred genre, mood, energy, and valence. Each song will receive a score out of 100 points, with 40 points for genre, 30 for mood, 20 for energy similarity, and 10 for valence similarity. Energy and valence will be scored based on how close they are to the user's preferences. The system will then rank songs from highest to lowest score and recommend the best matches.
 
-Some prompts to answer:
+### Song and UserProfile Features
 
-- What features does each `Song` use in your system
-  - For example: genre, mood, energy, tempo
-- What information does your `UserProfile` store
-- How does your `Recommender` compute a score for each song
-- How do you choose which songs to recommend
+**Song:**
+- `id`, `title`, and `artist`: Identify each song.
+- `genre` and `mood`: Describe the song's style and feeling.
+- `energy` and `valence`: Describe the song's intensity and positivity.
+- `tempo_bpm`, `danceability`, and `acousticness`: Provide additional music characteristics.
 
-You can include a simple diagram or bullet list if helpful.
+**UserProfile:**
+- `favorite_genre`: The user's preferred music genre.
+- `favorite_mood`: The user's preferred mood.
+- `target_energy`: The user's preferred energy level.
+- `likes_acoustic`: Whether the user prefers acoustic music.
+- `target_valence`: A planned attribute for the user's preferred positivity level.
+
+**Recommendation Process:**
+
+The recommender will compare each song with the user's preferences. A matching genre earns 40 points, a matching mood earns 30 points, energy similarity earns up to 20 points, and valence similarity earns up to 10 points. Songs will be ranked from highest to lowest score, and the highest-scoring songs will be recommended.
 
 ---
 

@@ -19,6 +19,45 @@ This project simulates a content-based music recommendation system using Python.
 
 Real-world music recommendation systems use listening habits, user preferences, and song characteristics to suggest music. My project will use a simple content-based recommendation system that compares songs with a user's preferred genre, mood, energy, and valence. Each song will receive a score out of 100 points, with 40 points for genre, 30 for mood, 20 for energy similarity, and 10 for valence similarity. Energy and valence will be scored based on how close they are to the user's preferences. The system will then rank songs from highest to lowest score and recommend the best matches.
 
+
+### Planned User Profile
+
+The recommender will use this example taste profile:
+
+```python
+user_profile = {
+    "favorite_genre": "lofi",
+    "favorite_mood": "chill",
+    "target_energy": 0.40,
+    "target_valence": 0.60,
+    "likes_acoustic": True
+}
+```
+
+
+### Recommendation System Flow
+
+Input: User Preferences
+        |
+        v
+Load Songs from songs.csv
+        |
+        v
+Process: Score Each Song
+- Genre match (40 points)
+- Mood match (30 points)
+- Energy similarity (20 points)
+- Valence similarity (10 points)
+        |
+        v
+Rank Songs by Total Score
+        |
+        v
+Output: Top K Recommended Songs
+
+
+This user prefers relaxed lofi music with moderate-low energy and a slightly positive mood.
+
 ### Song and UserProfile Features
 
 **Song:**
@@ -39,6 +78,27 @@ Real-world music recommendation systems use listening habits, user preferences, 
 The recommender will compare each song with the user's preferences. A matching genre earns 40 points, a matching mood earns 30 points, energy similarity earns up to 20 points, and valence similarity earns up to 10 points. Songs will be ranked from highest to lowest score, and the highest-scoring songs will be recommended.
 
 ---
+
+### Final Algorithm Recipe
+
+The recommender uses a weighted scoring system with a maximum of 100 points:
+
+- Genre match: 40 points
+- Mood match: 30 points
+- Energy similarity: 20 points
+- Valence similarity: 10 points
+
+For energy and valence, points are calculated using:
+
+Similarity = 1 - abs(song value - user preference)
+
+Each song receives a total score. The songs are then sorted from highest to lowest score, and the top K songs are recommended.
+
+### Potential Biases
+
+The system may favor certain genres and moods because 70% of the score comes from exact genre and mood matches. This could cause it to overlook songs from other genres that have similar energy or emotional characteristics. The small dataset of 18 songs also limits musical variety. In the future, the system could use partial mood matches or different scoring weights to improve recommendations.
+
+
 
 ## Getting Started
 

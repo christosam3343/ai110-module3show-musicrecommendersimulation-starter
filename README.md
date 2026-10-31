@@ -137,15 +137,50 @@ You can add more tests in `tests/test_recommender.py`.
 
 ## Sample Recommendation Output
 
-Paste a sample of your recommender's output here as a text block so a reader can see what it produces:
+Actual output from running `python -m src.main` from the project root:
 
-```
-# e.g.:
-# User profile: genre=indie, mood=chill, energy=low
-# Recommendations:
-#   1. ...
-#   2. ...
-#   3. ...
+```text
+Loading songs from data/songs.csv...
+Loaded songs: 18
+
+============================================================
+TOP 5 MUSIC RECOMMENDATIONS
+============================================================
+
+1. Sunrise City - Score: 97.20/100
+   Reasons:
+   Genre matches pop: +40 points. Mood matches happy: +30 points. Energy 0.82
+   compared with target 0.80: +19.60 points. Valence 0.84 compared with target
+   0.60: +7.60 points.
+------------------------------------------------------------
+
+2. Gym Hero - Score: 65.70/100
+   Reasons:
+   Genre matches pop: +40 points. Mood does not match happy: +0 points. Energy
+   0.93 compared with target 0.80: +17.40 points. Valence 0.77 compared with
+   target 0.60: +8.30 points.
+------------------------------------------------------------
+
+3. Rooftop Lights - Score: 57.10/100
+   Reasons:
+   Genre does not match pop: +0 points. Mood matches happy: +30 points. Energy
+   0.76 compared with target 0.80: +19.20 points. Valence 0.81 compared with
+   target 0.60: +7.90 points.
+------------------------------------------------------------
+
+4. Sidewalk Crown - Score: 28.40/100
+   Reasons:
+   Genre does not match pop: +0 points. Mood does not match happy: +0 points.
+   Energy 0.78 compared with target 0.80: +19.60 points. Valence 0.72 compared
+   with target 0.60: +8.80 points.
+------------------------------------------------------------
+
+5. Night Drive Loop - Score: 27.90/100
+   Reasons:
+   Genre does not match pop: +0 points. Mood does not match happy: +0 points.
+   Energy 0.75 compared with target 0.80: +19.00 points. Valence 0.49 compared
+   with target 0.60: +8.90 points.
+------------------------------------------------------------
 ```
 
 **Screenshot or video** *(optional)*: <!-- Insert a screenshot or demo video link here -->
